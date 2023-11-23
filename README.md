@@ -1,8 +1,12 @@
-# React + Vite
+## TODO app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+App created with React. To playaround with useState Hook.
+Fully working app, created with Vanilla JS you can found [here](https://github.com/dkumza/todo-app)
 
-Currently, two official plugins are available:
+#### Usage
+If you wanna play around localy:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1.  Clone the repository:  `git clone git@github.com:dkumza/todo-with-react.git`
+2.  Navigate to the project directory:  `cd ctodo-with-react`
+3.  Install the dependencies:  `npm i`
+4.  Start the development server:  `npm run dev`
