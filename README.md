@@ -1,7 +1,7 @@
 ## TODO app
 
 App created with React. To playaround with useState Hook.
-Fully working app, created with Vanilla JS you can found [here](https://github.com/dkumza/todo-app)
+Fully working app, created with Vanilla JS can be found [here](https://github.com/dkumza/todo-app)
 
 #### Usage
 If you wanna play around localy:
