@@ -1,6 +1,6 @@
 ## TODO app
 
-App created with React. To playaround with useState Hook.
+App created with React. To playaround with useState Hook. Task provided by bit.lt <br>
 Fully working app, created with Vanilla JS can be found [here](https://github.com/dkumza/todo-app)
 
 #### Usage
