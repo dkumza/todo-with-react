@@ -40,27 +40,31 @@ function App() {
 
    const handleEdit = () => {
       if (typeof edit === "number") {
+         // prevent for saving empty note
+         if (value === "") return;
          note[edit].value = value;
          setEdit([...note]);
          setEdit(null);
       }
    };
 
-   // handle edit on blur
-   const handleEditBlur = () => {
-      if (typeof edit === "number") {
-         note[edit].value = value;
-         setNote([...note]);
-         setEdit(null);
-      }
-   };
+   // handle edit on focus out
+   // const handleEditBlur = () => {
+   //    if (typeof edit === "number") {
+   //       // prevent for saving empty note
+   //       if (value === "") setValue(value);
+   //       note[edit].value = value;
+   //       setNote([...note]);
+   //       setEdit(null);
+   //    }
+   // };
 
    return (
       <div className="container mx-auto mt-6 flex flex-col items-center  max-w-lg bg-slate-50">
          <h1 className="text-7xl mb-6 text-gray-300">just do...</h1>
          <form className="min-w-full pb-1" onSubmit={handleNotes}>
             <input
-               className="border min-w-full pl-12 pr-6 py-3 outline-none placeholder:italic"
+               className="border border-b-2 min-w-full pl-12 pr-6 py-3 outline-none placeholder:italic"
                type="text"
                placeholder="Enter tasks..."
             />
@@ -69,7 +73,7 @@ function App() {
             {note.map((item, index) => (
                <li
                   className="list-none min-w-full border pr-6 py-2 flex justify-between text-gray-600 bg-white last:shadow-xl"
-                  onBlur={() => handleEditBlur(index)}
+                  // onBlur={() => handleEditBlur(index)}
                   key={index}
                >
                   <div className="li-left flex w-full">
@@ -84,6 +88,7 @@ function App() {
 
                      {typeof edit === "number" && edit === index ? (
                         <form
+                           className="w-full mr-4"
                            onSubmit={(e) => {
                               e.preventDefault();
                               handleEdit();
@@ -91,7 +96,7 @@ function App() {
                         >
                            <input
                               type="text"
-                              className="form-control"
+                              className="form-control w-full outline-none"
                               value={value}
                               onChange={(e) => {
                                  setValue(e.target.value);
@@ -124,6 +129,10 @@ function App() {
                   </div>
                </li>
             ))}
+         </div>
+         <div className="foot-wrap text-sm text-gray-400 mt-8">
+            <p>Press Enter to save note</p>
+            <p>Mouse click to edit note</p>
          </div>
       </div>
    );
