@@ -31,8 +31,14 @@ function App() {
       note.splice(index, 1);
       setNote([...note]);
    };
+
+   // handle change status to done, vice versa
+   const handleStatus = (index) => {
+      note[index].status = !note[index].status;
+      setNote([...note]);
+   };
    return (
-      <div className="container mx-auto mt-6 flex flex-col items-center w-3/12">
+      <div className="container mx-auto mt-6 flex flex-col items-center  max-w-lg">
          <h1 className="text-7xl mb-6 text-gray-300">just do...</h1>
          <form className="min-w-full" onSubmit={handleNotes}>
             <input
@@ -49,17 +55,28 @@ function App() {
                   key={index}
                >
                   <div className="li-left flex">
-                     <div className="status-btn pl-4 pr-4 text-gray-100 hover:cursor-pointer hover:text-green-300">
+                     <div
+                        className="status-btn pl-4 pr-4 text-gray-100 hover:cursor-pointer hover:text-green-300"
+                        // * change note style on note status change by pressing
+                        style={{ color: item.status && "#86efac" }}
+                        onClick={() => handleStatus(index)}
+                     >
                         <i className="bi bi-circle-fill"></i>
                      </div>
-                     <div className="note-wrap"> {item.value}</div>
+                     <div
+                        // * change note className on note status change by pressing
+                        className={
+                           item.status ? "text-gray-400 line-through" : ""
+                        }
+                     >
+                        {" "}
+                        {item.value}
+                     </div>
                   </div>
 
                   <div
                      className="del-btn text-gray-200 hover:cursor-pointer hover:text-rose-400"
-                     onClick={() => {
-                        handleDelete(index);
-                     }}
+                     onClick={() => handleDelete(index)}
                   >
                      <i className="bi bi-x-circle"></i>
                   </div>
