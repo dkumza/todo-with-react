@@ -37,6 +37,10 @@ function App() {
       note[index].status = !note[index].status;
       setNote([...note]);
    };
+
+   const handleEdit = (id, text) => {
+      console.log(id, text);
+   };
    return (
       <div className="container mx-auto mt-6 flex flex-col items-center  max-w-lg">
          <h1 className="text-7xl mb-6 text-gray-300">just do...</h1>
@@ -49,12 +53,11 @@ function App() {
          </form>
          <div className="notes-ul min-w-full bg-white">
             {note.map((item, index) => (
-               // console.log(item.value);
                <li
                   className="list-none min-w-full border pr-6 py-2 flex justify-between text-gray-600"
                   key={index}
                >
-                  <div className="li-left flex">
+                  <div className="li-left flex w-full">
                      <div
                         className="status-btn pl-4 pr-4 text-gray-100 hover:cursor-pointer hover:text-green-300"
                         // * change note style on note status change by pressing
@@ -66,10 +69,12 @@ function App() {
                      <div
                         // * change note className on note status change by pressing
                         className={
-                           item.status ? "text-gray-400 line-through" : ""
+                           item.status
+                              ? "text-gray-400 line-through w-full"
+                              : "w-full"
                         }
+                        onClick={() => handleEdit(index, item.value)}
                      >
-                        {" "}
                         {item.value}
                      </div>
                   </div>
