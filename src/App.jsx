@@ -4,7 +4,7 @@ import "./App.css";
 
 function App() {
    // state of all notes
-   const [note, setNote] = useState([]);
+   const [notes, setNotes] = useState([]);
    const [edit, setEdit] = useState(false);
    const [value, setValue] = useState(false);
 
@@ -13,51 +13,40 @@ function App() {
       e.preventDefault();
       if (e.target[0].value === "") return;
 
-      setNote([
-         ...note,
+      setNotes([
+         ...notes,
          {
             value: e.target[0].value,
             status: false,
          },
       ]);
 
-      // reset input field
+      // reset input field after new input value
       e.target[0].value = "";
    };
 
    // handle delete notes
    const handleDelete = (index) => {
       // console.log("clicked");
-      note.splice(index, 1);
-      setNote([...note]);
+      notes.splice(index, 1);
+      setNotes([...notes]);
    };
 
    // handle change status to done, vice versa
    const handleStatus = (index) => {
-      note[index].status = !note[index].status;
-      setNote([...note]);
+      notes[index].status = !notes[index].status;
+      setNotes([...notes]);
    };
 
    const handleEdit = () => {
       if (typeof edit === "number") {
-         // prevent for saving empty note
+         // prevent for saving empty notes
          if (value === "") return;
-         note[edit].value = value;
-         setEdit([...note]);
+         notes[edit].value = value;
+         setNotes([...notes]);
          setEdit(null);
       }
    };
-
-   // handle edit on focus out
-   // const handleEditBlur = () => {
-   //    if (typeof edit === "number") {
-   //       // prevent for saving empty note
-   //       if (value === "") setValue(value);
-   //       note[edit].value = value;
-   //       setNote([...note]);
-   //       setEdit(null);
-   //    }
-   // };
 
    return (
       <div className="container mx-auto mt-6 flex flex-col items-center  max-w-lg bg-slate-50">
@@ -70,22 +59,21 @@ function App() {
             />
          </form>
          <div className="notes-ul min-w-full bg-slate-50 flex flex-col gap-1 bg-gra">
-            {note.map((item, index) => (
+            {notes.map((item, index) => (
                <li
                   className="list-none min-w-full border pr-6 py-2 flex justify-between text-gray-600 bg-white last:shadow-xl"
-                  // onBlur={() => handleEditBlur(index)}
                   key={index}
                >
                   <div className="li-left flex w-full">
                      <div
                         className="status-btn pl-4 pr-5 text-gray-100 hover:cursor-pointer hover:text-green-300"
-                        // * change note style on note status change by pressing
+                        // * change notes style on notes status change by pressing
                         style={{ color: item.status && "#86efac" }}
                         onClick={() => handleStatus(index)}
                      >
                         <i className="bi bi-circle-fill"></i>
                      </div>
-
+                     {/* if edit is number and that number === index value, enable edit note form */}
                      {typeof edit === "number" && edit === index ? (
                         <form
                            className="w-full mr-4"
@@ -97,21 +85,24 @@ function App() {
                            <input
                               type="text"
                               className="form-control w-full outline-none"
+                              // sets value = to input value
                               value={value}
                               onChange={(e) => {
+                                 // passes target value
                                  setValue(e.target.value);
                               }}
                            />
                         </form>
                      ) : (
                         <div
-                           // * change note className on note status change by pressing
+                           // * change notes className on notes status change by pressing
                            className={
                               item.status
                                  ? "text-gray-400 line-through w-full"
                                  : "w-full"
                            }
                            onClick={() => {
+                              // onClick pass index to edit and note value
                               setEdit(index);
                               setValue(item.value);
                            }}
@@ -131,8 +122,8 @@ function App() {
             ))}
          </div>
          <div className="foot-wrap text-sm text-gray-400 mt-8">
-            <p>Press Enter to save note</p>
-            <p>Mouse click to edit note</p>
+            <p>Press Enter to save notes</p>
+            <p>Mouse click to edit notes</p>
          </div>
       </div>
    );
