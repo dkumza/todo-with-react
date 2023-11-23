@@ -6,7 +6,7 @@ function App() {
    // state of all notes
    const [notes, setNotes] = useState([]);
    const [edit, setEdit] = useState(false);
-   const [value, setValue] = useState(false);
+   const [value, setValue] = useState("");
 
    // handle input field on submit
    const handleNotes = (e) => {
@@ -27,7 +27,6 @@ function App() {
 
    // handle delete notes
    const handleDelete = (index) => {
-      // console.log("clicked");
       notes.splice(index, 1);
       setNotes([...notes]);
    };
@@ -53,7 +52,7 @@ function App() {
          <h1 className="text-7xl mb-6 text-gray-300">just do...</h1>
          <form className="min-w-full pb-1" onSubmit={handleNotes}>
             <input
-               className="border border-b-2 min-w-full pl-12 pr-6 py-3 outline-none placeholder:italic"
+               className="border border-b-2 min-w-full px-6 py-3 outline-none placeholder:italic"
                type="text"
                placeholder="Enter tasks..."
             />
